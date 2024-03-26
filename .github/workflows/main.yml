@@ -43,10 +43,9 @@ jobs:
       - name: Log into DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          ecr: auto
-          logout: true
+          username: ${{ secrets.TOKEN }}
+          password: ${{ secrets.dckr_pat_yLdyVuGbMtBAnFHDwbQbH0wB9hw }}
+          
 
       - name: Build and push Docker image
         run: |
