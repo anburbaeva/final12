@@ -56,5 +56,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t Final-main1:latest .
-          docker push ralphiko/Final-main1:latest
+          docker build -t token:latest .
+          docker push anburbaeva/token:latest
