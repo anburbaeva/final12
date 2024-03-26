@@ -1,3 +1,6 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
 name: CI/CD
 
 on:
@@ -12,17 +15,23 @@ jobs:
   test:
     name: Build and Test
     runs-on: ubuntu-latest
+
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+
 
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.21
 
+
       - name: Install dependencies
-        run: go mod download
+        run: |
+          go mod download
 
       - name: Run Go Vet
         run: go vet ./...
@@ -33,7 +42,8 @@ jobs:
   publish:
     name: Publish to DockerHub
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
+    needs: test
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -41,10 +51,10 @@ jobs:
       - name: Log into DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.ANBURBAEVA }}
+          password: ${{ secrets.dckr_pat_yLdyVuGbMtBAnFHDwbQbH0wB9hw }}
 
       - name: Build and push Docker image
         run: |
-          docker build -t anburbaeva/token:latest .
-          docker push anburbaeva/token:latest
+          docker build -t Final-main1:latest .
+          docker push ralphiko/Final-main1:latest
