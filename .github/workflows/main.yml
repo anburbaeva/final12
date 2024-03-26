@@ -31,6 +31,9 @@ jobs:
         run: |
           go mod download
 
+      - name: Run Go Vet
+        run: go vet ./...
+
       - name: Run tests
         run: go test ./...
 
@@ -52,5 +55,5 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build -t dockerfile:latest .
-          docker tag dockerfile:latest ralphiko/dockerfile:latest
-          docker push ralphiko/dockerfile:latest
+          docker tag dockerfile:latest anburbaeva/dockerfile:latest
+          docker push anburbaeva/dockerfile:latest
