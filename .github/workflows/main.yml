@@ -12,27 +12,18 @@ jobs:
   test:
     name: Build and Test
     runs-on: ubuntu-latest
-
-
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-
 
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.21
 
-
       - name: Install dependencies
-        run: |
-          go mod download
+        run: go mod download
 
-
-          
       - name: Run Go Vet
         run: go vet ./...
 
@@ -43,7 +34,6 @@ jobs:
     name: Publish to DockerHub
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -56,6 +46,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t token:latest .
-          docker tag token:latest anburbaeva/token:latest
+          docker build -t anburbaeva/token:latest .
           docker push anburbaeva/token:latest
